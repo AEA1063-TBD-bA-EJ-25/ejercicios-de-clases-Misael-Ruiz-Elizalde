@@ -6,7 +6,7 @@ go;
 
 use escuelita;
 
-create TABLE Persona (
+create TABLE persona (
     CURP CHAR(18) NOT NULL PRIMARY KEY,
     Nombre nvarchar(50) NOT NULL,
     Direccion NVARCHAR(100)NULL,
@@ -118,3 +118,68 @@ insert into empleado  (idEmpleado, nombre, sexo)values (4, 'Matilde Sandoval','F
 
     alter TABLE empleado
         add nacimiento date not null 
+
+    alter table empleado
+        add RFC char(13) NULL
+
+    alter table empleado
+        add CONSTRAINT rfc_unico unique(RFC) 
+       -- check ( date < getDate)
+
+    update empleado
+        set RFC = 'CCC555'
+        where idEmpledo = 5
+
+    select * from empleado
+
+    insert into empleado (idEmpledo, nombre, sexo, rfc) values (6, 'Refugio Saldivar', 'F', 'CCC555')
+
+    create table Departamento (
+        idDepartamento int not null primary key,
+        Nombre nvarchar(30)
+    )
+
+    insert into Departamento (idDepartamento, Nombre)
+        values (1, 'ventas'), (2, 'MKT'), (3, 'TIC')
+
+    select * from Departamento
+
+    alter table empleado
+        add TrabajaEn int null FOREIGN key references departamento (idDepartamento) 
+
+    select * from empleado
+
+    update empleado
+        set TrabajaEn = 3
+        where idEmpledo = 4
+
+    delete from Departamento
+        where idDepartamento = 2
+
+    alter table empleado 
+        drop CONSTRAINT FK__empleado_trabaj__412EB2B6
+
+    alter TABLE empleado
+        add CONSTRAINT FK__empleado_TrabajaEn FOREIGN key (TrabajaEn) REFERENCES Departamento (idDepartamento)
+            on delete set null
+
+     delete from Departamento
+        where idDepartamento = 2
+
+        select * from empleado
+
+    create TABLE Familiares (
+        nombre NVARCHAR(50) not null, 
+        idEmpleado int not null FOREIGN key REFERENCES empleado(idempleado) on delete CASCADE
+    )
+
+    insert into Familiares (nombre, idEmpleado)
+        values('Gertrudis', 1), ('Daniela', 1), ('Manuel', 2)
+
+    SELECT * FROM empleado
+    SELECT * FROM Familiares
+    
+    delete from empleado    
+        where idEmpledo = 1
+
+        select * from Familiares

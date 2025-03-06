@@ -73,3 +73,48 @@ insert into MalaPersona (CURP, Nombre, Direccion, Nacimiento)
     select * from MalaPersona
 
     drop table MalaPersona
+
+create table empleado(
+    idEmpleado int not null PRIMARY KEY,
+    nombre NVARCHAR(50)NOT NULL,
+    sueldo money DEFAULT 1500
+)
+
+insert into empleado (idEmpleado, nombre, sueldo)
+    values (1, 'Felipe de jesus', 2000)
+
+select * from empleado;
+
+insert into empleado(idEmpleado, nombre)
+    Values (2, 'Chuerk')
+
+SELECT * from empleado;
+
+create table personita(
+    idEmpledo int not null PRIMARY KEY,
+    nombre NVARCHAR(50)NOT NULL,
+    sueldo money DEFAULT 1500,
+    telefono varchar(20) check ( telefono like '667[0-9][0-9][0-9]')
+)
+
+insert into personita values (1, 'Juana', null, '667123')
+
+alter table empleado
+    add sexo char(1) null check (sexo in ('M','H'))
+
+insert into empleado  (idEmpleado, nombre, sexo)values (3, 'Alexis Jara Rodriguez','R')
+insert into empleado  (idEmpleado, nombre, sexo)values (4, 'Matilde Sandoval','F')
+
+
+    select * from empleado;
+    select * from personita;
+
+    alter table empleado
+        drop CONSTRAINT CK__empleado__sexo__3F466844
+
+    insert into empleado (idEmpleado, nombre, sexo) values (5, 'Refugio Saldivar', 'F')
+
+    insert into empleado (idEmpleado, nombre, sexo) values (6, 'Delia Barantes', 'R')
+
+    alter TABLE empleado
+        add nacimiento date not null 

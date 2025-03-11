@@ -1,4 +1,6 @@
-﻿CREATE Database [Northwind]
+﻿
+
+
 GO
 
 USE [Northwind]

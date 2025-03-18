@@ -183,3 +183,10 @@ insert into empleado  (idEmpleado, nombre, sexo)values (4, 'Matilde Sandoval','F
         where idEmpledo = 1
 
         select * from Familiares
+
+Select SYSDATETIME()
+select SYSDATETIMEOFFSET()
+select SYSUTCDATETIME()
+
+select (DATANAME( month, nacimiento )) from Persona
+select nacimiento, (DATANAME( month, nacimiento )), DAY( nacimiento) from Persona

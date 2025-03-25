@@ -45,3 +45,57 @@ select unitprice, Quantity, discount, UnitPrice * Quantity, Discount * UnitPrice
     select sum(UnitPrice * Quantity - (Discount * UnitPrice * Quantity)) as total from [Order Details]
     where OrderID = 10250
 
+ select sum(UnitPrice * Quantity - (Discount * UnitPrice * Quantity)) as total from [Order Details]
+ 
+  select sum(UnitPrice * Quantity - (Discount * UnitPrice * Quantity)) as total from [Order Details]
+    where ProductID = 1
+ 
+ Select * from [Order Details]
+    Select * from Categories
+
+select count(*) from orders 
+
+
+Select sum([Order Details].UnitPrice * Quantity - (Discount * [Order Details].UnitPrice * Quantity)) as total from [Order Details]
+    Join Products on products.ProductID = [Order Details].ProductID
+    Where CategoryID = 1
+
+Select sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as total from [Order Details] od
+    Join Products p on p.ProductID = od.ProductID
+    Where CategoryID = 1
+
+Select sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as total from [Order Details] od
+    Join Products p on p.ProductID = od.ProductID
+    Join Categories c on c.CategoryID = p.CategoryID
+    Where CategoryName like '%Beverages%'
+
+Select sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as total from [Order Details] od
+    Join Products p on p.ProductID = od.ProductID
+    Join Categories c on c.CategoryID = p.CategoryID
+    Join Orders o on o.OrderID = o.OrderID
+    Where CategoryName like '%Beverages%' and year (OrderDate) = 1997 
+    
+
+Select * from [Order Details] od 
+-- sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as total from [Order Details] od
+    Join Products p on p.ProductID = od.ProductID
+    Join Categories c on c.CategoryID = p.CategoryID
+    Join Orders o on o.OrderID = o.OrderID
+    Where CategoryName like '%Beverages%' and year (OrderDate) = 1997 
+
+Select sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as total from [Order Details] od
+    Join Products p on p.ProductID = od.ProductID
+    Join Categories c on c.CategoryID = p.CategoryID
+    Join Orders o on o.OrderID = o.OrderID
+    Where 1=1
+     --and CategoryName like '%Beverages%' 
+     and year (OrderDate) = 1997 
+    
+
+select * from orders
+
+--TAREA  
+--CONSULTA NUEVA 
+--SABER CUANTO VENDI EN EL 97
+
+--IMPORTE DE VENTA DEL AÑO 97

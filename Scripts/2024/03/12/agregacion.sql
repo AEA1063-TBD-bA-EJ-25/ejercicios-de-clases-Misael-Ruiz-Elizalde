@@ -94,8 +94,48 @@ Select sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as to
 
 select * from orders
 
+
 --TAREA  
 --CONSULTA NUEVA 
 --SABER CUANTO VENDI EN EL 97
 
 --IMPORTE DE VENTA DEL AÑO 97
+
+Select c.CategoryName, sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
+    Join orders o on o.OrderID = od.OrderID
+    Join Products p on p.ProductID = p.ProductID
+    join Categories c on p.CategoryID = c.CategoryID 
+    Where year (OrderDate) = 1997 
+    GROUP by c.CategoryName
+    order by c.CategoryName asc
+
+-- por meses
+Select datename(month, o.OrderDate), c.CategoryName, sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
+    Join orders o on o.OrderID = od.OrderID
+    Join Products p on p.ProductID = p.ProductID
+    join Categories c on p.CategoryID = c.CategoryID 
+    Where year (OrderDate) = 1997 
+    GROUP by datepart(month,o.OrderDate), datename(month, o.OrderDate), c.CategoryName
+    order by datepart(month, o.OrderDate), c.CategoryName asc
+
+--por categoria y despues por mes
+
+Select  c.CategoryName, datename(month, o.OrderDate), sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
+    Join orders o on o.OrderID = od.OrderID
+    Join Products p on p.ProductID = p.ProductID
+    join Categories c on p.CategoryID = c.CategoryID 
+    Where year (o.OrderDate) = 1997 
+    GROUP by c.CategoryName, datepart(month,o.OrderDate), datename(month, o.OrderDate) 
+    order by c.CategoryName, datepart(month, o.OrderDate) asc
+
+    --cuanto nos compró el cliente por cada una de las categorias con nombre de la compañia y con id del cliente
+
+Select s.CompanyName, u.CustomerID, c.CategoryName, datename(month, o.OrderDate), sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
+    Join orders o on o.OrderID = od.OrderID
+    Join Products p on p.ProductID = p.ProductID
+    join Categories c on p.CategoryID = c.CategoryID 
+    join Customers u on u.CustomerID = u.CustomerID
+    join Customers s on s.CompanyName = s.CompanyName
+    Where year (o.OrderDate) = 1997 
+    GROUP by s.CompanyName, u.CustomerID, c.CategoryName, datepart(month,o.OrderDate), datename(month, o.OrderDate) 
+    order by c.CategoryName, datepart(month, o.OrderDate) asc

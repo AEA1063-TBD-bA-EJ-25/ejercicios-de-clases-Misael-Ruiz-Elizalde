@@ -128,8 +128,8 @@ Select  c.CategoryName, datename(month, o.OrderDate), sum(od.UnitPrice * Quantit
     GROUP by c.CategoryName, datepart(month,o.OrderDate), datename(month, o.OrderDate) 
     order by c.CategoryName, datepart(month, o.OrderDate) asc
 
-    --cuanto nos compró el cliente por cada una de las categorias con nombre de la compañia y con id del cliente
 
+--cuanto nos compró el cliente por cada una de las categorias con nombre de la compañia y con id del cliente
 Select s.CompanyName, u.CustomerID, c.CategoryName, datename(month, o.OrderDate), sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
     Join orders o on o.OrderID = od.OrderID
     Join Products p on p.ProductID = p.ProductID
@@ -139,3 +139,20 @@ Select s.CompanyName, u.CustomerID, c.CategoryName, datename(month, o.OrderDate)
     Where year (o.OrderDate) = 1997 
     GROUP by s.CompanyName, u.CustomerID, c.CategoryName, datepart(month,o.OrderDate), datename(month, o.OrderDate) 
     order by c.CategoryName, datepart(month, o.OrderDate) asc
+
+--Ordenes menores a 500 dólares
+Select o.orders, sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
+    Join orders o on o.OrderID = od.OrderID
+    Join Products p on p.ProductID = p.ProductID
+    join Categories c on p.CategoryID = c.CategoryID 
+    Where year (OrderDate) = 1997 
+    GROUP by c.CategoryName
+    order by c.CategoryName asc
+
+
+Select orderid,
+        sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) as importe from [Order Details] od
+        group BY orderid
+          having  sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) < 500
+        order by importe
+      

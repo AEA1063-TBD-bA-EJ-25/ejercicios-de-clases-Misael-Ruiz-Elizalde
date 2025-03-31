@@ -156,3 +156,37 @@ Select orderid,
           having  sum(od.UnitPrice * Quantity - (Discount * od.UnitPrice * Quantity)) < 500
         order by importe
       
+
+-- CLASE DEL 31 DE MARZO
+-- Producto on el precio mayor en dos consultas
+Select max(Unitprice) from Products
+select productname from Products
+    where UnitPrice = 263.50
+
+    --mejoria}
+    declare @maximo money
+select @maximo = max(Unitprice) from Products
+select productname from Products
+    where UnitPrice = @maximo
+
+    --mejoria con subconsulta
+select productname, UnitPrice from Products
+    where UnitPrice = (select max(UnitPrice) from Products)
+
+    select companyname
+    from Customers
+    where customerid in (select customerid from orders where orderdate > '1/1/95')
+
+--con el join
+    select companyname
+    from Customers
+    join orders on orders.customerID = customers.customerID
+     where orderdate > '1/1/1995'
+
+
+--usando northeind 
+select companyname, contactname
+from customers c 
+    where exists 
+        (Select * from orders o where c.CustomerID = o.CustomerID 
+        and OrderDate > '1/1/199')

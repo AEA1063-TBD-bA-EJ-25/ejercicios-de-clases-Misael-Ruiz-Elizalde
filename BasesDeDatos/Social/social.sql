@@ -8,6 +8,8 @@ create table Friend(ID1 int, ID2 int);
 create table Likes(ID1 int, ID2 int);
 go
 
+--drop table likes
+
 /* Populate the tables with our data */
 insert into Highschooler values (1510, 'Jordan', 9);
 insert into Highschooler values (1689, 'Gabriel', 9);

@@ -1,4 +1,5 @@
-use northwind 
+
+
 
 --OPERADORES DE CONJUNTOS
 select * from employees

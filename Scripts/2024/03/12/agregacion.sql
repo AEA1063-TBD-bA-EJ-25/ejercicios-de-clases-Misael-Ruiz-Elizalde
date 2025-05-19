@@ -190,3 +190,16 @@ from customers c
     where exists 
         (Select * from orders o where c.CustomerID = o.CustomerID 
         and OrderDate > '1/1/199')
+
+
+
+use Northwind
+GO
+Create Proc ventasRetrasadas
+AS 
+select * from orders 
+where orderdate is null 
+
+exec ventasRetrasadas
+
+GO
